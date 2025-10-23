@@ -26,8 +26,6 @@ const mockProducts = [
 const Products = () => {
   const [searchParams] = useSearchParams();
   const [filteredProducts, setFilteredProducts] = useState(mockProducts);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
   const category = searchParams.get("category");
   const type = searchParams.get("type");
@@ -36,27 +34,34 @@ const Products = () => {
   const brands = Array.from(new Set(mockProducts.map((p) => p.brand)));
   const types = Array.from(new Set(mockProducts.map((p) => p.type)));
 
+  // Initialize state from URL parameters
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(() => 
+    brand ? [brand] : []
+  );
+  const [selectedTypes, setSelectedTypes] = useState<string[]>(() => 
+    type ? [type] : []
+  );
+
   useEffect(() => {
     let filtered = mockProducts;
 
+    // Filter by category from URL
     if (category) {
       filtered = filtered.filter((p) => p.category === category);
     }
-    if (type) {
-      filtered = filtered.filter((p) => p.type === type);
-    }
-    if (brand) {
-      filtered = filtered.filter((p) => p.brand === brand);
-    }
+    
+    // Filter by selected brands (unified state)
     if (selectedBrands.length > 0) {
       filtered = filtered.filter((p) => selectedBrands.includes(p.brand));
     }
+    
+    // Filter by selected types (unified state)
     if (selectedTypes.length > 0) {
       filtered = filtered.filter((p) => selectedTypes.includes(p.type));
     }
 
     setFilteredProducts(filtered);
-  }, [category, type, brand, selectedBrands, selectedTypes]);
+  }, [category, selectedBrands, selectedTypes]);
 
   const toggleBrand = (brandName: string) => {
     setSelectedBrands((prev) =>

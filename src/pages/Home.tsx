@@ -13,6 +13,7 @@ import pliersImg from "@/assets/pliers.jpg";
 import wrenchesImg from "@/assets/wrenches.jpg";
 import tapesImg from "@/assets/tapes.jpg";
 import refillsImg from "@/assets/refills.jpg";
+import storeInteriorImg from "@/assets/store-interior.jpg";
 
 const categories = [
   {
@@ -63,6 +64,22 @@ const Home = () => {
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
             Sua loja especializada em materiais hidráulicos, elétricos e ferramentas
+          </p>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="flex flex-col md:flex-row items-center gap-8 bg-card rounded-lg p-8 shadow-lg">
+          <img 
+            src={storeInteriorImg} 
+            alt="Interior da Hidronorte Comercial" 
+            className="w-full md:w-1/3 rounded-lg object-cover shadow-md"
+          />
+          <p className="text-lg md:text-xl text-foreground leading-relaxed">
+            Do básico ao acabamento, tudo em um só lugar. Facilite sua vida. 
+            Aqui você encontra a linha completa de materiais hidráulicos e 
+            elétricos com atendimento rápido e preço justo.
           </p>
         </div>
       </section>
